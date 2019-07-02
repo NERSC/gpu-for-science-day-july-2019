@@ -62,8 +62,6 @@ module load gpu4science/intel
 # build
 make clean
 make COMP=intel
-# by default, the test (short version will run)
-# to run the longer version, try ./gpp.ex benchmark
 ```
 
 ### CUDA
