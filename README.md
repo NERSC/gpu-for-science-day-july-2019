@@ -47,6 +47,14 @@ module use /usr/common/software/gpu4sci-jul-2019/modulefiles
 | `gpu4science/openmp`  |
 | `gpu4science/openacc` |
 
+> **Info: To switch between available modules:**
+```bash
+make clean
+# make sure unload the current module
+module unload gpu4science/{gcc,intel,cuda,kokkos,openmp,openacc}
+# load the new module
+module load gpu4science/{gcc,intel,cuda,kokkos,openmp,openacc}
+```
 
 ## Cori GPU
 
@@ -63,7 +71,6 @@ salloc -A gpu4sci -C gpu -N 1 -t 04:00:00 -c 10 --gres=gpu:1
 module load gpu4science/intel
 
 # build
-make clean
 make COMP=intel
 ```
 
@@ -74,7 +81,6 @@ make COMP=intel
 module load gpu4science/cuda
 
 # build
-make clean
 make COMP=cuda
 ```
 
@@ -85,7 +91,6 @@ make COMP=cuda
 module load gpu4science/openacc
 
 # build
-make clean
 make COMP=openacc
 ```
 
@@ -96,7 +101,6 @@ make COMP=openacc
 module load gpu4science/openmp
 
 # build
-make clean
 make COMP=openmp
 export OMP_NUM_THREADS=10
 ```
@@ -110,7 +114,6 @@ export OMP_NUM_THREADS=10
 module load gpu4science/kokkos
 
 # build
-make clean
 make COMP=kokkos
 ```
 
