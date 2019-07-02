@@ -16,6 +16,9 @@ Hacking Competition Code for NERSC's GPU for Science Day, July 2019
     - custom complex number class
   - `timemory`
     - C++ template library for performance reporting
+    - PGI compiler
+      - v18.10 will fail to compile this library 
+      - v19.5 (default loaded by modules below) will compile this library but not report anything -- this is a compiler bug
   - `cereal`
     - Library used by `timemory` for serialization (not used)
 
