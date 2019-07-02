@@ -30,3 +30,32 @@
 *.exe
 *.out
 *.app
+
+*~
+*.o
+*.ex
+*.so
+
+# PyCTest
+CTestConfig.cmake
+CTestCustom.cmake
+CTestTestfile.cmake
+Init.cmake
+Stages.cmake
+Testing
+Utilities.cmake
+
+# IDE files
+/CMakeLists.txt.user*
+/.vscode
+/*.nja
+settings.json
+
+# build directories
+/build*
+
+# miscellaneous
+*timemory*output*
+
+# macOS Finder files
+.DS_Store
