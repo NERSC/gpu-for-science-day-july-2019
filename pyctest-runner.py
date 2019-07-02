@@ -72,7 +72,7 @@ def configure():
         sys.exit(0)
 
     if os.path.exists(args.test_dir):
-        pyctest.BINARY_DIR = os.path.abspath(args.test_dir)
+        pyctest.BINARY_DIRECTORY = os.path.abspath(args.test_dir)
 
     git_exe = helpers.FindExePath("git")
     if git_exe is not None:
@@ -96,8 +96,8 @@ def run_pyctest():
     cmd.Execute()
 
     # make sure there is not an existing (old) Testing directory
-    if os.path.exists(os.path.join(pyctest.BINARY_DIR, "Testing")):
-        shutil.rmtree(os.path.join(pyctest.BINARY_DIR, "Testing"))
+    if os.path.exists(os.path.join(pyctest.BINARY_DIRECTORY, "Testing")):
+        shutil.rmtree(os.path.join(pyctest.BINARY_DIRECTORY, "Testing"))
 
     #   BUILD_NAME
     pyctest.BUILD_NAME = "{}-{}".format(args.team, args.compiler)
@@ -122,9 +122,9 @@ def run_pyctest():
     try:
         if args.post_cleanup:
             for f in files:
-                if os.path.exists(os.path.join(pyctest.BINARY_DIR, f)):
-                    os.remove(os.path.join(pyctest.BINARY_DIR, f))
-            shutil.rmtree(os.path.join(pyctest.BINARY_DIR, "Testing"))
+                if os.path.exists(os.path.join(pyctest.BINARY_DIRECTORY, f)):
+                    os.remove(os.path.join(pyctest.BINARY_DIRECTORY, f))
+            shutil.rmtree(os.path.join(pyctest.BINARY_DIRECTORY, "Testing"))
     except:
         pass
 
