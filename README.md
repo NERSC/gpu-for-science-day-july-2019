@@ -36,6 +36,7 @@ cd gpu-for-science-day-july-2019/gpp
 
 ```bash
 module use /usr/common/software/gpu4sci-jul-2019/modulefiles
+module load gpu4science/required
 ```
 
 | Available modules     |
