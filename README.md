@@ -26,7 +26,7 @@ Hacking Competition Code for NERSC's GPU for Science Day, July 2019
 ```bash
 cd $HOME
 git clone https://github.com/NERSC/gpu-for-science-day-july-2019.git
-cd gpu4science-app/gpp
+cd gpu-for-science-day-july-2019/gpp
 ```
 
 ### Cori Modules __[REQUIRED]__
