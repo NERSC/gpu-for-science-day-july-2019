@@ -159,4 +159,4 @@ srun ./gpp.ex benchmark
    - This script will:
      - Build the code in the `gpp` folder
      - Execute the benchmark test
-     - Submit the build and test logs to [cdash.nersc.gov](https://cdash.nersc.gov/index.php?project=gpu4science-app)
+     - Submit the build and test logs to [cdash.nersc.gov](https://cdash.nersc.gov/index.php?project=gpu-for-science-day-july-2019)
