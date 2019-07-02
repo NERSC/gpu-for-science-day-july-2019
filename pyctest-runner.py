@@ -108,7 +108,7 @@ def run_pyctest():
                    "WORKING_DIRECTORY": os.path.join(pyctest.BINARY_DIRECTORY)}
 
     # create test
-    pyctest.test("benchmark", ["srun", "./gpp.ex", "{}".format(args.type)],
+    pyctest.test("{}".format(args.type), ["srun", "./gpp.ex", "{}".format(args.type)],
                  properties=bench_props)
 
     print('Running PyCTest:\n\n\t{}\n\n'.format(pyctest.BUILD_NAME))
