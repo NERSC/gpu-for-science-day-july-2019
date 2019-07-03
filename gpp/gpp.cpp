@@ -69,7 +69,7 @@ void noflagOCC_solver(size_t number_bands, size_t ngpown, size_t ncouls,
   // Focus your optimization efforts here.
   // You shouldn't need to change code anywhere else
 
-#pragma acc parallel loop gang collapse(2)\
+#pragma acc parallel loop gang vector collapse(2)\
     reduction(+:ach_re0, ach_re1, ach_re2, ach_im0, ach_im1, ach_im2)
   // hint: check to see where data are (host or device?)
 
@@ -92,7 +92,7 @@ void noflagOCC_solver(size_t number_bands, size_t ngpown, size_t ncouls,
       //#pragma acc copy(achtemp_re_loc[:], achtemp_im_loc[:]) collapse(2)\
           eduction(+:achtemp_re_loc, achtemp_im_loc)
       #pragma acc loop vector
-      for (size_t ig = 0; ig < ncouls; ++ig)
+     for (size_t ig = 0; ig < ncouls; ++ig)
       {
         for (int iw = nstart; iw < nend; ++iw) // 3 iterations
         {
