@@ -24,6 +24,18 @@ Hacking Competition Code for NERSC's GPU for Science Day, July 2019
 
 ## Development Environment
 
+### Logging on to Cori
+> **If you are already a NERSC user, your normal account should be enabled for the Cori GPU nodes.**
+```bash
+ssh yournerscusername@cori.nersc.gov
+password + OTP
+```
+> **If you are not a NERSC user, we have provided some test accounts.**
+```bash
+ssh testXXX@cori.nersc.gov
+testaccountpassword
+```
+
 ### Obtaining code
 
 ```bash
