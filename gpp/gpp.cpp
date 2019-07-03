@@ -71,7 +71,7 @@ void noflagOCC_solver(size_t number_bands, size_t ngpown, size_t ncouls,
 
 #pragma acc data copyin(inv_igp_index[0:inv_igp_index_size], indinv[0:indinv_size], wtilde_array, wx_array, I_eps_array, aqsmtemp) copyout(achtemp_re[0:achtemp_re_size], achtemp_im[0:achtemp_im_size])
 
-#pragma acc parallel loop gang vector reduction(+:ach_re0, ach_re1, ach_re2, ach_im0, ach_im1, ach_im2)
+#pragma acc parallel loop gang vector reduction(+:ach_re0, ach_re1, ach_re2, ach_im0, ach_im1, ach_im2) collapse(2)
 
   // hint: check to see where data are (host or device?)
 
