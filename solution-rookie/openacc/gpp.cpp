@@ -81,12 +81,15 @@ void noflagOCC_solver(size_t number_bands, size_t ngpown, size_t ncouls,
       int indigp = inv_igp_index[my_igp];
       int igp = indinv[indigp];
       dataType achtemp_re_loc[nend - nstart], achtemp_im_loc[nend - nstart];
+   
       for (int iw = nstart; iw < nend; ++iw) {
         achtemp_re_loc[iw] = 0.00;
         achtemp_im_loc[iw] = 0.00;
       }
 
       // 32768 iterations - most of the compute effort is here!
+      #pragma acc copy[achtemp_re_loc, achtemp_im_loc]\
+          reduction(+:achtemp_re_loc, achtemp_im_loc)
       for (size_t ig = 0; ig < ncouls; ++ig)
       {
         for (int iw = nstart; iw < nend; ++iw) // 3 iterations
