@@ -69,11 +69,12 @@ void noflagOCC_solver(size_t number_bands, size_t ngpown, size_t ncouls,
   // Focus your optimization efforts here.
   // You shouldn't need to change code anywhere else
 
-#pragma acc parallel loop gang vector\
+#pragma acc parallel loop gang collapse(2)\
     reduction(+:ach_re0, ach_re1, ach_re2, ach_im0, ach_im1, ach_im2)
   // hint: check to see where data are (host or device?)
 
   // hint: think about loop ordering
+
   for (int n1 = 0; n1 < number_bands; ++n1) // 512 iterations
   {
     for (int my_igp = 0; my_igp < ngpown; ++my_igp) // 1634 iterations
@@ -88,8 +89,9 @@ void noflagOCC_solver(size_t number_bands, size_t ngpown, size_t ncouls,
       }
 
       // 32768 iterations - most of the compute effort is here!
-      #pragma acc copy[achtemp_re_loc, achtemp_im_loc]\
-          reduction(+:achtemp_re_loc, achtemp_im_loc)
+      //#pragma acc copy(achtemp_re_loc[:], achtemp_im_loc[:]) collapse(2)\
+          eduction(+:achtemp_re_loc, achtemp_im_loc)
+      #pragma acc loop vector
       for (size_t ig = 0; ig < ncouls; ++ig)
       {
         for (int iw = nstart; iw < nend; ++iw) // 3 iterations
