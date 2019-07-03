@@ -96,19 +96,24 @@ noflagOCC_solver(size_t number_bands, size_t ngpown, size_t ncouls, int* inv_igp
     // hint: where are the data? target or device?
     // hint: data reduction
 
+
+    #pragma acc data copyin(inv_igp_index, indinv, wx_array, wtilde_array, I_eps_array, aqsmtemp, aqsntemp, vcoul) copy(achtemp_re, achtemp_im)
+	#pragma acc parallel loop gang worker collapse(2)
     for(size_t n1 = 0; n1 < number_bands; ++n1)  // 512 iterations
     {
+        for(size_t iw = nstart; iw < nend; ++iw)  // 3 iterations
         // hint: think about loop ordering/loop collapsing
-        for(size_t my_igp = 0; my_igp < ngpown; ++my_igp)  // 1634 iterations
         {
-            int indigp = inv_igp_index[my_igp];
-            int igp    = indinv[indigp];
-
-            // 32768 iterations - most of the compute effort is here!
-            for(size_t ig = 0; ig < ncouls; ++ig)
+			#pragma acc loop tile(32,4)
+            for(size_t my_igp = 0; my_igp < ngpown; ++my_igp)  // 1634 iterations
             {
-                for(size_t iw = nstart; iw < nend; ++iw)  // 3 iterations
+				#pragma acc loop vector
+            	// 32768 iterations - most of the compute effort is here!
+            	for(size_t ig = 0; ig < ncouls; ++ig)
                 {
+                  	int indigp = inv_igp_index[my_igp];
+            		int igp    = indinv[indigp];
+
                     CustomComplex<dataType> wdiff =
                         wx_array[iw] - wtilde_array(my_igp, ig);
                     CustomComplex<dataType> delw =
@@ -163,7 +168,7 @@ main(int argc, char** argv)
         {
             number_bands    = 512;
             nvband          = 2;
-            ncouls          = 512;
+            ncouls          = 2048;
             nodes_per_group = 20;
         }
         else
